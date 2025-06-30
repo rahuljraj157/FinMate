@@ -2,7 +2,7 @@
 import { combineReducers } from '@reduxjs/toolkit'
 import transactionReducer from "@/features/transactionslice"
 import budgetReducer from "@/features/budgetSlice";
-import budget from '@/model/budget';
+
 
 
 const rootReducer=combineReducers({transaction:transactionReducer,budget:budgetReducer});

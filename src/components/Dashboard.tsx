@@ -104,26 +104,20 @@ useEffect(() => {
    console.log(result,90000000000)
 }, [transactiondata]);
 
-const expense=transactiondata.reduce((acc:any,curr:Transaction)=>{
-
-  if(curr.type==="expense"){
-    acc+=curr.amount
-
+const expense = transactiondata.reduce((acc: number, curr: Transaction) => {
+  if (curr.type === "expense") {
+    acc += curr.amount;
   }
   return acc;
+}, 0);
 
-},0
-)
-const income=transactiondata.reduce((acc:any,curr:Transaction)=>{
-
-  if(curr.type==="income"){
-    acc+=curr.amount
-
+const income = transactiondata.reduce((acc: number, curr: Transaction) => {
+  if (curr.type === "income") {
+    acc += curr.amount;
   }
   return acc;
+}, 0);
 
-},0
-)
 
 
 
@@ -149,8 +143,8 @@ const income=transactiondata.reduce((acc:any,curr:Transaction)=>{
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <SummaryCard title="Total Balance" amount={(income - expense).toString()} />
 
-          <SummaryCard title="Income" amount={income} />
-          <SummaryCard title="Expenses" amount={expense} />
+          <SummaryCard title="Income" amount={income.toString()} />
+          <SummaryCard title="Expenses" amount={expense.toString()} />
         </div>
 
         {/* Green Themed Chart */}
