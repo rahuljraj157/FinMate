@@ -91,6 +91,7 @@ export default function Transactions() {
     if (!tran.length) return;
     if (!value) {
       setFilteredTran(tran);
+      console.log(tran);
       return;
     }
     const filtered = tran.filter((item) => {
