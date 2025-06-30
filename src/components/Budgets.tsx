@@ -115,7 +115,7 @@ const Budgets = () => {
     };
     fetchBudget();
     fetchTransactions();
-  }, [userId, dispatch]);
+  }, [userId, dispatch,fetchTransactions]);
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 p-4 w-full bg-black text-white min-h-screen">

@@ -6,6 +6,19 @@ import { signOut, useSession } from 'next-auth/react';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+export interface Transaction {
+  _id: string;
+  userId: string;
+  title: string;
+  amount: number;
+  type: string;        // e.g., 'expense' or 'income'
+  category: string;
+  notes: string;
+  createdAt: string;   // ISO date string
+  updatedAt: string;   // ISO date string
+  __v: number;
+}
+
 
 import {
   LineChart,
@@ -35,6 +48,14 @@ export default function Dashboard() {
   const { data: session } = useSession();
     const userId = session?.user?.id;
   const dispatch=useDispatch();
+      const fetchTransactions = useCallback(async () => {
+      if (!userId) return;
+      const res = await fetch(`/api/transactions?userId=${userId}`);
+      const json = await res.json();
+      console.log(json,40000)
+      dispatch(setTransaction(json.transactiondata));
+      setTransactiondata(json.transactiondata)
+    }, [userId, dispatch]);
   useEffect(()=>{
     console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbb")
     const fetchBudget=async()=>{
@@ -49,16 +70,9 @@ export default function Dashboard() {
     fetchBudget();
     fetchTransactions();
 
-  },[userId, dispatch])
+  },[userId, dispatch,fetchTransactions])
 
-    const fetchTransactions = useCallback(async () => {
-      if (!userId) return;
-      const res = await fetch(`/api/transactions?userId=${userId}`);
-      const json = await res.json();
-      console.log(json,40000)
-      dispatch(setTransaction(json.transactiondata));
-      setTransactiondata(json.transactiondata)
-    }, [userId, dispatch]);
+
 
 useEffect(() => {
   const monthMap = [
@@ -69,7 +83,7 @@ useEffect(() => {
   const grouped: { [key: string]: number } = {};
   console.log(transactiondata,100000000000)
 
-  transactiondata.forEach((item: any) => {
+  transactiondata.forEach((item: Transaction) => {
     const date = new Date(item.createdAt);
     const month = monthMap[date.getMonth()];
     console.log(month,70000000000000)
@@ -90,7 +104,7 @@ useEffect(() => {
    console.log(result,90000000000)
 }, [transactiondata]);
 
-const expense=transactiondata.reduce((acc:any,curr:any)=>{
+const expense=transactiondata.reduce((acc:any,curr:Transaction)=>{
 
   if(curr.type==="expense"){
     acc+=curr.amount
@@ -100,7 +114,7 @@ const expense=transactiondata.reduce((acc:any,curr:any)=>{
 
 },0
 )
-const income=transactiondata.reduce((acc:any,curr:any)=>{
+const income=transactiondata.reduce((acc:any,curr:Transaction)=>{
 
   if(curr.type==="income"){
     acc+=curr.amount

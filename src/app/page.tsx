@@ -240,15 +240,16 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#0f0f0f] text-white flex flex-col items-center justify-center px-6 relative overflow-hidden">
 
       {/* 🪙 Top-left Icon */}
-      <img
+      <Image
         src="/logo.png"
-        alt="App Icon"
+        alt="App Icon" width={100} height={100}
         className="absolute top-4 left-4 w-10 h-10 z-20 rounded-full"
       />
 
