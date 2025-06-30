@@ -86,7 +86,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Email and password are required');
         }
 
-        await connectDB();
+        await connectDB()
 
         const userDoc = await userModel.findOne({ email: credentials.email });
         if (!userDoc) throw new Error('User not found');
