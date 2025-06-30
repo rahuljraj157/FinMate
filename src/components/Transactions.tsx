@@ -98,6 +98,7 @@ export default function Transactions() {
       const itemDate = new Date(item.createdAt).toISOString().slice(0, 10);
       return itemDate === value;
     });
+   console.log("filter")
     setFilteredTran(filtered);
   };
 

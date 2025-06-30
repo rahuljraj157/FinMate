@@ -60,7 +60,7 @@ const Budgets = () => {
     });
 
     const data = await res.json();
-    console.log(data, '✅ Budget submitted');
+    console.log(data);
   };
 
   const handleEdit = async (e: React.FormEvent<HTMLFormElement>) => {
