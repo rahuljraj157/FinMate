@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "FinMate - Personal Finance App",
   description: "Track your income, expenses, goals, and budgets.",
   icons: {
-    icon: "/logo.png", 
+    icon: "/icon.png", 
   },
 };
 
