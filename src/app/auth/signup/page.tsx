@@ -1,3 +1,4 @@
+
 'use client';
 
 import { signIn } from 'next-auth/react';
@@ -14,39 +15,38 @@ export default function SignupPage() {
   const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 🔹 Signup Request
-    const signupRes = await fetch('/api/auth/signup', {
+    // Signup API call
+    const res = await fetch('/api/auth/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
     });
 
-    const signupData = await signupRes.json();
+    const data = await res.json();
 
-    if (!signupRes.ok) {
+    if (!res.ok) {
       MySwal.fire({
         title: 'Signup Failed',
-        text: signupData?.message || 'Please try again.',
+        text: data?.message || 'Please try again.',
         icon: 'error',
       });
       return;
     }
 
-    // 🔹 Show Success Modal
+    // Success
     await MySwal.fire({
       title: 'Success!',
-      text: signupData.message || 'Registered successfully.',
+      text: data.message || 'Registered successfully.',
       icon: 'success',
-      confirmButtonText: 'OK',
     });
 
-    // 🔹 Auto Login
+    // Auto login
     const loginRes = await signIn('credentials', {
       email: form.email,
       password: form.password,
@@ -65,7 +65,7 @@ export default function SignupPage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-black px-4">
+    <main className="min-h-screen flex items-center justify-center bg-black px-4">
       <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
           Create Your finmate Account
@@ -99,14 +99,15 @@ export default function SignupPage() {
             className="w-full px-4 py-2 border rounded-md"
             required
           />
-
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
           >
             Sign Up
           </button>
-        <Link href="/auth/login">login</Link>
+          <Link href="/auth/login" className="block text-center text-blue-600 hover:underline">
+            Already have an account? Log in
+          </Link>
         </form>
       </div>
     </main>
