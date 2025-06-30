@@ -16,8 +16,7 @@ export async function POST(req:Request){
         const newuser=new user({name,email,password:hashedpassword})
         await newuser.save();
         return NextResponse.json({message:"user registered successfully"},{status:200})
-    } catch (error) {
-        return NextResponse.json({message:"server error"},{status:500})
-        
-    }
+    } catch {
+  return NextResponse.json({ message: "server error" }, { status: 500 });
+}
 }

@@ -15,15 +15,7 @@ interface BudgetType {
   other: string;
 }
 
-interface Transaction {
-  _id: string;
-  title: string;
-  amount: number;
-  type: string;
-  category: string;
-  notes: string;
-  createdAt: string;
-}
+
 
 export interface Budget {
   [key: string]: number;

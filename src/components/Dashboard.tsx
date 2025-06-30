@@ -30,14 +30,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-const data = [
-  { month: 'Jan', spending: 4000 },
-  { month: 'Feb', spending: 6000 },
-  { month: 'Mar', spending: 3500 },
-  { month: 'Apr', spending: 8000 },
-  { month: 'May', spending: 5000 },
-  { month: 'Jun', spending: 7500 },
-];
+
 
 
 export default function Dashboard() {
