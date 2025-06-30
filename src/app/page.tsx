@@ -248,7 +248,7 @@ export default function Home() {
 
       {/* 🪙 Top-left Icon */}
       <Image
-        src="/logo.png"
+        src="/icon.png"
         alt="App Icon" width={100} height={100}
         className="absolute top-4 left-4 w-10 h-10 z-20 rounded-full"
       />
